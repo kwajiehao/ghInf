@@ -11,8 +11,8 @@ size <- 10000
 
 # generate samples from the 3-level gibbs sampler
 i <- 10
-j <- 10
-k <- 10
+j <- 11
+k <- 12
 results_gibbs <- centered_gibbs3(i = i, j = j, k = k, ndraws = size, burnin = burn, flat_prior = TRUE,
                                  tau = 1, tau_a = 2, tau_b = 1, tau_c = 2, sigma_2 = 2)
 samples_gibbs <- results_gibbs$samples[,(burn+1):(size+burn)]

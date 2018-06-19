@@ -1,4 +1,4 @@
-# compares performance in terms of fill-in ratio of nonzero elements for the spam package
+# compares performance in terms of fill-in ratio of nonzero elements for the Matrix package
 # for general non-symmetric 2-level models. The goal is to see if the asymmetry of the tree
 # structure, achieved by having a different number of children per node in a subsequent level,
 # affects the fill-in.
@@ -19,7 +19,7 @@ library(spam64)
 i = 100
 J = seq(1, i)
 
-results_inc <- fillin2(method="spam", i=i, J=J)
+results_inc <- fillin2(method="matrix", i=i, J=J)
 results_inc$ diff
 
 # pyramid
@@ -27,7 +27,7 @@ i = 100
 J = c(seq(1, floor(i/2)), seq(floor(i/2),1))
 if (i%%2 == 1){J = c(seq(1, floor(i/2)), floor(i/2)+1, seq(floor(i/2),1))}
 
-results_pyr <- fillin2(method="spam", i=i, J=J)
+results_pyr <- fillin2(method="matrix", i=i, J=J)
 results_pyr$diff
 
 # extremes
@@ -36,7 +36,7 @@ J = rep(1,i)
 J[1] <- i
 J[i] <- i
 
-results_ext <- fillin2(method="spam", i=i, J=J)
+results_ext <- fillin2(method="matrix", i=i, J=J)
 results_ext$diff
 
 # all three tests show that optimal fill-in is returned

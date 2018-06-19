@@ -1,0 +1,16 @@
+Package: ghInf
+Version: 0.0.0.9000
+Title: Inference for Gaussian hierarchical models 
+Description: Generates precision matrices for inference for both centered and uncentered Gaussian hierarchical models. Other auxilliary functions help to calculate the ratio between the obtained fill-in and the optimal fill-in for various packages and label permutations. 
+Authors@R: person("Jie Hao", "Kwa", , "jie_hao_kwa@alumni.brown.edu", c("aut", "cre"))
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+ByteCompile: true
+Imports: 
+    spam,
+    Matrix,
+    spam64,
+    stats,
+    utils
+RoxygenNote: 6.0.1

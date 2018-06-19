@@ -30,12 +30,16 @@ fillin2 <- function(method = 'both', permute_method = 'none', i, J, ...){
   # permutation of sequence of row/columns according to user's choice of permute method
   o <- seq(1, (i + j + 1))
 
-  if (permute_method=="none"){
+  if (permute_method == "none"){
     og <- o
   }
 
-  if (permute_method=="random"){
+  if (permute_method == "random"){
     og <- sample(o)
+  }
+
+  if (permute_method == "reverse"){
+    og <- rev(o)
   }
 
   # number of variables ignoring the root variable

@@ -41,6 +41,10 @@ centered_fillin2 <- function(method = 'both', permute_method = 'none', i, j, ...
     og <- depthfirst(i,j, levels = 2)
   }
 
+  if (permute_method == "reverse"){
+    og <- rev(o)
+  }
+
   # number of variables ignoring the root variable
   d_minus_one <- i*j + i
 

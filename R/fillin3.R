@@ -47,6 +47,10 @@ fillin3 <- function(method, permute_method='none', i, J, K, ...){
     og <- sample(o)
   }
 
+  if (permute_method == "reverse"){
+    og <- rev(o)
+  }
+
   # number of variables - 1
   d_minus_one <- k + j + i
 

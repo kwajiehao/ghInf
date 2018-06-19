@@ -44,6 +44,9 @@ centered_fillin3 <- function(method, permute_method = 'none', i, j, k, ...){
     og <- depthfirst(i,j, levels = 3)
   }
 
+  if (permute_method == "reverse"){
+    og <- rev(o)
+  }
   # number of variables - 1
   d_minus_one <- i*j*k + i*j + i
 

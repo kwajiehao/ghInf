@@ -1,6 +1,6 @@
 # ghInf
 
-The goal of ghInf is to provide tools for inference for general Gaussian hierarchical models. Note that since this package is for private use, all observations are assumed to be 0, and the mean of the root parameter also assumed to be zero (subject to updating in the future). This includes functions which:
+The goal of ghInf is to provide tools for inference for general Gaussian hierarchical models. Note that since this package is for private use, all observations are assumed to be 0, and the mean of the root parameter also assumed to be zero (subject to updating in the future). The functions can be found in the R folder. This includes functions which:
 
 Generate the precision matrix for centered 2- or 3-level Gaussian hierarchical models:
 - centered_precgen2.R  
@@ -42,21 +42,4 @@ githubinstall("ghInf")
 
 ## Tests
 
-Test examples which show how the functions work can be found in the "tests" folder. Images of generated plots are included in corresponding folders. The tests are to:
-
-Check that the general precision matrix generation function works by comparing it with the centered parametrization generation function:
-- consistency_precgen.R
-
-Check that the precision generation function for centered parametrizations work by comparing samples drawn from exact inference with that from a gibbs sampler:
-- precision_accuracy2.R
-- precision_accuracy3.R
-
-
-Check the performance of each package in obtaining the optimal fill-in for the cholesky factor when permuting the labels of the precision matrix:
-- permutations2_Matrix.R
-- permutations2_spam.R
-- permutations2_asymmetric_Matrix.R
-- permutations2_asymmetric_spam.R
-
-Show the poor performance of the Matrix function when the labels are permuted in reverse and random order:
-- fillinPerf_Matrix.R
+Test examples which show how the functions work can be found in the "tests" folder. 

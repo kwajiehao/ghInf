@@ -1,6 +1,6 @@
 # ghInf
 
-The goal of ghInf is to provide tools for inference for general Gaussian hierarchical models. Note that since this package is for personal use, all observations are assumed to be 0, and the mean of the root parameter also assumed to be zero (subject to updating in the future). The functions can be found in the R folder. This includes functions which:
+The goal of ghInf is to provide tools for inference for general Gaussian hierarchical models. Note that since this package is for personal use, all observations are assumed to be 0 for now, and the mean of the root parameter also assumed to be zero (subject to updating in the future). The functions can be found in the R folder. This includes functions which:
 
 Generate the precision matrix for centered 2- or 3-level Gaussian hierarchical models:
 - centered_precgen2.R  

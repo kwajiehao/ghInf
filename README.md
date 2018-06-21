@@ -16,7 +16,7 @@ Calculate the fill-in ratio of the calculated Cholesky factor relative to the op
 - fillin2.R
 - fillin3.R
 
-A gibbs sampler for centered 2- or 3-level Gaussian hierarchical models:
+A Gibbs sampler for centered 2- or 3-level Gaussian hierarchical models:
 - centered_gibbs2.R
 - centered_gibbs3.R
 

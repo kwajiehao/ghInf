@@ -13,6 +13,7 @@
 #' @param i number of nodes at level 1
 #' @param J vector specifying the number of children nodes in level 2 per node at level 1
 #' @param K vector specifying the number of children nodes in level 3 per node at level 2
+#' @param permute determines whether or not to use default row permutation algorithm before matrix factorization to reduce fill-in
 #' @param ... for other params used in centered_precgen3
 #'
 #' @return the fill-in ratio with respect to the optimal fill-in, and the time taken for the cholesky decomposition
@@ -23,7 +24,7 @@
 #' J <- c(1,2)
 #' K <- c(1,2,3)
 #' fillin3(method = 'matrix', permute_method = 'none', i = i, J=J, K=K)
-fillin3 <- function(method, permute_method='none', i, J, K, ...){
+fillin3 <- function(method, permute_method='none', i, J, K, permute = TRUE, ...){
 
   # method denotes which linear algebra package to use
   # permute_method denotes how the precision matrix is permuted before use with the chosen linear algebra package
@@ -63,7 +64,7 @@ fillin3 <- function(method, permute_method='none', i, J, K, ...){
     start <- Sys.time()
 
     # cholesky factor
-    cholesky <- spam::chol(Q_spam)
+    cholesky <- spam::chol(Q_spam, pivot = permute)
 
     # end time
     end <- Sys.time() - start
@@ -83,7 +84,7 @@ fillin3 <- function(method, permute_method='none', i, J, K, ...){
     start <- Sys.time()
 
     # cholesky factor
-    cholesky <- Matrix::chol(Q)
+    cholesky <- Matrix::chol(Q, pivot = permute)
 
     # end time
     end <- Sys.time() - start
@@ -105,7 +106,7 @@ fillin3 <- function(method, permute_method='none', i, J, K, ...){
     start <- Sys.time()
 
     # cholesky factor
-    cholesky <- Matrix::chol(Q)
+    cholesky <- Matrix::chol(Q, pivot = permute)
 
     # end time
     end <- Sys.time() - start
@@ -123,7 +124,7 @@ fillin3 <- function(method, permute_method='none', i, J, K, ...){
     start <- Sys.time()
 
     # cholesky factor
-    cholesky_spam <- spam::chol(Q_spam)
+    cholesky_spam <- spam::chol(Q_spam, pivot = permute)
 
     # end time
     end2 <- Sys.time() - start

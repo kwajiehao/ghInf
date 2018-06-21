@@ -12,6 +12,7 @@
 #' @param permute_method determines how the precision matrix is permuted before use with the chosen linear algebra package
 #' @param i number of nodes at level 1
 #' @param j number of children nodes in level 2 per node at level 1
+#' @param permute determines whether or not to use default row permutation algorithm before matrix factorization to reduce fill-in
 #' @param ... for other params used in centered_precgen2
 #'
 #' @return the fill-in ratio with respect to the optimal fill-in, and the time taken for the cholesky decomposition
@@ -21,7 +22,7 @@
 #' i <- 2
 #' j <- 3
 #' centered_fillin2(method = 'matrix', permute_method = 'random', i = i, j = j)
-centered_fillin2 <- function(method = 'both', permute_method = 'none', i, j, ...){
+centered_fillin2 <- function(method = 'both', permute_method = 'none', i, j, permute = TRUE,...){
 
   # sparse precision generation
   q <- centered_precgen2(i, j, ...)
@@ -58,7 +59,7 @@ centered_fillin2 <- function(method = 'both', permute_method = 'none', i, j, ...
     start <- Sys.time()
 
     # cholesky factor
-    cholesky <- spam::chol(Q_spam)
+    cholesky <- spam::chol(Q_spam, pivot = permute)
 
     # end time
     end <- Sys.time() - start
@@ -79,7 +80,7 @@ centered_fillin2 <- function(method = 'both', permute_method = 'none', i, j, ...
     start <- Sys.time()
 
     # cholesky factor
-    cholesky <- Matrix::chol(Q)
+    cholesky <- Matrix::chol(Q, pivot = permute)
 
     # end time
     end <- Sys.time() - start
@@ -103,7 +104,7 @@ centered_fillin2 <- function(method = 'both', permute_method = 'none', i, j, ...
     start <- Sys.time()
 
     # cholesky factor
-    cholesky <- Matrix::chol(Q)
+    cholesky <- Matrix::chol(Q, pivot = permute)
 
     # end time
     end <- Sys.time() - start
@@ -121,7 +122,7 @@ centered_fillin2 <- function(method = 'both', permute_method = 'none', i, j, ...
     start <- Sys.time()
 
     # cholesky factor
-    cholesky_spam <- spam::chol(Q_spam)
+    cholesky_spam <- spam::chol(Q_spam, pivot = permute)
 
     # end time
     end2 <- Sys.time() - start
@@ -136,4 +137,3 @@ centered_fillin2 <- function(method = 'both', permute_method = 'none', i, j, ...
   }
 
 }
-

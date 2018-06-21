@@ -40,3 +40,4 @@ results_ext <- fillin2(method="spam", i=i, J=J)
 results_ext$diff
 
 # all three tests show that optimal fill-in is returned
+

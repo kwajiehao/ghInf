@@ -14,6 +14,7 @@
 #' @param i number of nodes at level 1
 #' @param j number of children nodes in level 2 per node at level 1
 #' @param k number of children nodes in level 3 per node at level 2
+#' @param permute determines whether or not to use default row permutation algorithm before matrix factorization to reduce fill-in
 #' @param ... for other params used in centered_precgen3
 #'
 #' @return the fill-in ratio with respect to the optimal fill-in, and the time taken for the cholesky decomposition
@@ -24,7 +25,7 @@
 #' j <- 3
 #' k <- 2
 #' centered_fillin3(method = 'matrix', permute_method = 'random', i = i, j = j, k=k)
-centered_fillin3 <- function(method, permute_method = 'none', i, j, k, ...){
+centered_fillin3 <- function(method, permute_method = 'none', i, j, k, permute = TRUE, ...){
 
   # sparse precision generation
   q <- centered_precgen3(i, j, k, ...)
@@ -58,7 +59,7 @@ centered_fillin3 <- function(method, permute_method = 'none', i, j, k, ...){
     start <- Sys.time()
 
     # cholesky factor
-    cholesky <- spam::chol(Q_spam)
+    cholesky <- spam::chol(Q_spam, pivot = permute)
 
     # end time
     end <- Sys.time() - start
@@ -77,7 +78,7 @@ centered_fillin3 <- function(method, permute_method = 'none', i, j, k, ...){
     start <- Sys.time()
 
     # cholesky factor
-    cholesky <- Matrix::chol(Q)
+    cholesky <- Matrix::chol(Q, pivot = permute)
 
     # end time
     end <- Sys.time() - start
@@ -99,7 +100,7 @@ centered_fillin3 <- function(method, permute_method = 'none', i, j, k, ...){
     start <- Sys.time()
 
     # cholesky factor
-    cholesky <- Matrix::chol(Q)
+    cholesky <- Matrix::chol(Q, pivot = permute)
 
     # end time
     end <- Sys.time() - start
@@ -116,7 +117,7 @@ centered_fillin3 <- function(method, permute_method = 'none', i, j, k, ...){
     start <- Sys.time()
 
     # cholesky factor
-    cholesky_spam <- spam::chol(Q_spam)
+    cholesky_spam <- spam::chol(Q_spam, pivot = permute)
 
     # end time
     end2 <- Sys.time() - start

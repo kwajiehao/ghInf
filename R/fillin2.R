@@ -12,6 +12,7 @@
 #' @param permute_method determines how the precision matrix is permuted before use with the chosen linear algebra package
 #' @param i number of nodes at level 1
 #' @param J vector specifying the number of children nodes in level 2 per node at level 1
+#' @param permute determines whether or not to use default row permutation algorithm before matrix factorization to reduce fill-in
 #' @param ... for other params used in centered_precgen2
 #'
 #' @return the fill-in ratio with respect to the optimal fill-in, and the time taken for the cholesky decomposition
@@ -21,7 +22,7 @@
 #' i <- 2
 #' J <- c(1,3)
 #' fillin2(method = 'matrix', permute_method = 'random', i = i, J = J)
-fillin2 <- function(method = 'both', permute_method = 'none', i, J, ...){
+fillin2 <- function(method = 'both', permute_method = 'none', i, J, permute = TRUE, ...){
 
   # sparse precision generation
   q <- precgen2(i, J, ...)
@@ -55,7 +56,7 @@ fillin2 <- function(method = 'both', permute_method = 'none', i, J, ...){
     start <- Sys.time()
 
     # cholesky factor
-    cholesky <- spam::chol(Q_spam)
+    cholesky <- spam::chol(Q_spam, pivot = permute)
 
     # end time
     end <- Sys.time() - start
@@ -76,7 +77,7 @@ fillin2 <- function(method = 'both', permute_method = 'none', i, J, ...){
     start <- Sys.time()
 
     # cholesky factor
-    cholesky <- Matrix::chol(Q)
+    cholesky <- Matrix::chol(Q, pivot = permute)
 
     # end time
     end <- Sys.time() - start
@@ -100,7 +101,7 @@ fillin2 <- function(method = 'both', permute_method = 'none', i, J, ...){
     start <- Sys.time()
 
     # cholesky factor
-    cholesky <- Matrix::chol(Q)
+    cholesky <- Matrix::chol(Q, pivot = permute)
 
     # end time
     end <- Sys.time() - start
@@ -118,7 +119,7 @@ fillin2 <- function(method = 'both', permute_method = 'none', i, J, ...){
     start <- Sys.time()
 
     # cholesky factor
-    cholesky_spam <- spam::chol(Q_spam)
+    cholesky_spam <- spam::chol(Q_spam, pivot = permute)
 
     # end time
     end2 <- Sys.time() - start

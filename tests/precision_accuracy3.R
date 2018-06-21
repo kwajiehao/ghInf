@@ -2,9 +2,6 @@
 # from exact inference and the gibbs sampler. we assume a mean of 0 for the root parameter
 # and compare samples of the root variable B.
 
-# load library
-library(MASS)
-
 # sample specifications
 burn <- 100
 size <- 10000
@@ -13,7 +10,7 @@ size <- 10000
 i <- 10
 j <- 11
 k <- 12
-results_gibbs <- centered_gibbs3(i = i, j = j, k = k, ndraws = size, burnin = burn, flat_prior = TRUE,
+results_gibbs <- ghInf::centered_gibbs3(i = i, j = j, k = k, ndraws = size, burnin = burn, flat_prior = TRUE,
                                  tau = 1, tau_a = 2, tau_b = 1, tau_c = 2, sigma_2 = 2)
 samples_gibbs <- results_gibbs$samples[,(burn+1):(size+burn)]
 
@@ -23,11 +20,11 @@ trace3 <- plot(df$iterations, df$B, type = 'l', main = 'Trace plot of beta',
                xlab = 'iterations', ylab = 'beta')
 
 # generate samples with the precision matrix
-results_exact <- centered_precgen3(i = i, j = j, k = k, flat_prior = TRUE, tau = 1, tau_a = 2, tau_b = 1,
+results_exact <- ghInf::centered_precgen3(i = i, j = j, k = k, flat_prior = TRUE, tau = 1, tau_a = 2, tau_b = 1,
                                    tau_c = 2, sigma_2 = 2)
-Q_exact <- sparseMatrix(results_exact$indices_i, results_exact$indices_j, x = results_exact$entries)
+Q_exact <- Matrix::sparseMatrix(results_exact$indices_i, results_exact$indices_j, x = results_exact$entries)
 cov_exact <- solve(Q_exact)
-samples_exact <- mvrnorm(n = size, mu = rep(0, dim(cov_exact)[1]), Sigma = cov_exact)
+samples_exact <- MASS::mvrnorm(n = size, mu = rep(0, dim(cov_exact)[1]), Sigma = cov_exact)
 samples_exact <- t(samples_exact)
 
 # qqplot of samples from gibbs vs exact sampling

@@ -4,7 +4,7 @@
 \alias{fillin3}
 \title{centered_fillin3}
 \usage{
-fillin3(method, permute_method = "none", i, J, K, ...)
+fillin3(method, permute_method = "none", i, J, K, permute = TRUE, ...)
 }
 \arguments{
 \item{method}{determines which linear algebra package to use}
@@ -16,6 +16,8 @@ fillin3(method, permute_method = "none", i, J, K, ...)
 \item{J}{vector specifying the number of children nodes in level 2 per node at level 1}
 
 \item{K}{vector specifying the number of children nodes in level 3 per node at level 2}
+
+\item{permute}{determines whether or not to use default row permutation algorithm before matrix factorization to reduce fill-in}
 
 \item{...}{for other params used in centered_precgen3}
 }

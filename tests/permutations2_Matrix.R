@@ -1,12 +1,6 @@
 # compares performance in terms of fill-in ratio of nonzero elements for both spam and Matrix packages
 # for 3 different permutations (for 2-level models)
 
-# import libraries
-library(Matrix)
-library(spam)
-library(spam64)
-library(ggplot2)
-
 ##### matrix #####
 
 # number of children at each level
@@ -24,7 +18,7 @@ for (i in 1:l){
 results <- rep(0, l^2)
 for (i in 1:l){
   for (j in 1:l){
-    temp <- centered_fillin2(method = "matrix", permute_method = "none",
+    temp <- ghInf::centered_fillin2(method = "matrix", permute_method = "none",
                              i = level1[i], j = level1[j], permute = TRUE)
     results[(i-1)*l + j] <- temp$diff
   }
@@ -36,7 +30,7 @@ print(results) # optimal fill-in
 results <- rep(0, l^2)
 for (i in 1:l){
   for (j in 1:l){
-    temp <- centered_fillin2(method = "matrix", permute_method = "depthfirst",
+    temp <- ghInf::centered_fillin2(method = "matrix", permute_method = "depthfirst",
                              i = level1[i], j = level1[j], permute = TRUE)
     results[(i-1)*l + j] <- temp$diff
   }
@@ -48,7 +42,7 @@ print(results) # optimal fill-in
 results_reverse <- rep(0, l^2)
 for (i in 1:l){
   for (j in 1:l){
-    temp <- centered_fillin2(method = "matrix", permute_method = "reverse",
+    temp <- ghInf::centered_fillin2(method = "matrix", permute_method = "reverse",
                              i = level1[i], j = level1[j], permute = TRUE)
     results_reverse[(i-1)*l + j] <- temp$diff
   }
@@ -60,7 +54,7 @@ print(results_reverse) # optimal fill-in
 results_random <- rep(0, l^2)
 for (i in 1:l){
   for (j in 1:l){
-    temp <- centered_fillin2(method = "matrix", permute_method = "random",
+    temp <- ghInf::centered_fillin2(method = "matrix", permute_method = "random",
                              i = level1[i], j = level1[j], permute = TRUE)
     results_random[(i-1)*l + j] <- temp$diff
   }
@@ -72,7 +66,7 @@ print(results_random) # optimal fill-in
 results <- rep(0, l^2)
 for (i in 1:l){
   for (j in 1:l){
-    temp <- centered_fillin2(method = "matrix", permute_method = "none",
+    temp <- ghInf::centered_fillin2(method = "matrix", permute_method = "none",
                              i = level1[i], j = level1[j], permute = FALSE)
     results[(i-1)*l + j] <- temp$diff
   }
@@ -84,7 +78,7 @@ print(results) # optimal fill-in
 results <- rep(0, l^2)
 for (i in 1:l){
   for (j in 1:l){
-    temp <- centered_fillin2(method = "matrix", permute_method = "depthfirst",
+    temp <- ghInf::centered_fillin2(method = "matrix", permute_method = "depthfirst",
                              i = level1[i], j = level1[j], permute = FALSE)
     results[(i-1)*l + j] <- temp$diff
   }
@@ -96,7 +90,7 @@ print(results) # optimal fill-in
 results_reverse <- rep(0, l^2)
 for (i in 1:l){
   for (j in 1:l){
-    temp <- centered_fillin2(method = "matrix", permute_method = "reverse",
+    temp <- ghInf::centered_fillin2(method = "matrix", permute_method = "reverse",
                              i = level1[i], j = level1[j], permute = FALSE)
     results_reverse[(i-1)*l + j] <- temp$diff
   }
@@ -108,7 +102,7 @@ print(results_reverse) # not optimal! with reverse labelling the ratio is very b
 results_random <- rep(0, l^2)
 for (i in 1:l){
   for (j in 1:l){
-    temp <- centered_fillin2(method = "matrix", permute_method = "random",
+    temp <- ghInf::centered_fillin2(method = "matrix", permute_method = "random",
                              i = level1[i], j = level1[j], permute = FALSE)
     results_random[(i-1)*l + j] <- temp$diff
   }

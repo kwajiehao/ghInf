@@ -4,7 +4,8 @@
 \alias{centered_fillin2}
 \title{centered_fillin2}
 \usage{
-centered_fillin2(method = "both", permute_method = "none", i, j, ...)
+centered_fillin2(method = "both", permute_method = "none", i, j,
+  permute = TRUE, ...)
 }
 \arguments{
 \item{method}{determines which linear algebra package to use}
@@ -14,6 +15,8 @@ centered_fillin2(method = "both", permute_method = "none", i, j, ...)
 \item{i}{number of nodes at level 1}
 
 \item{j}{number of children nodes in level 2 per node at level 1}
+
+\item{permute}{determines whether or not to use default row permutation algorithm before matrix factorization to reduce fill-in}
 
 \item{...}{for other params used in centered_precgen2}
 }

@@ -12,5 +12,6 @@ Imports:
     Matrix,
     spam64,
     stats,
-    utils
+    utils,
+    MASS
 RoxygenNote: 6.0.1

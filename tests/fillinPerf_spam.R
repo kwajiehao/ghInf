@@ -1,4 +1,4 @@
-# plot the performance of the cholesky function in the Matrix package without applying permutation algorithms
+# plot the performance of the cholesky function in the spam package without applying permutation algorithms
 # prior to matrix factorization. performance is measured in terms of fill-in relative to optimal fill-in
 # for random and reverse permutations to the labelling of the precision matrix
 
@@ -34,7 +34,7 @@ for (i in 1:l){
 results_reverse <- rep(0, l^2)
 for (i in 1:l){
   for (j in 1:l){
-    temp <- centered_fillin2(method = "matrix", permute_method = "reverse",
+    temp <- centered_fillin2(method = "spam", permute_method = "reverse",
                              i = level1[i], j = level1[j], permute = FALSE)
     results_reverse[(i-1)*l + j] <- temp$diff
   }
@@ -52,7 +52,7 @@ for (i in 1:l){
     print(paste0("level 1: ", level1[i], ", level 2: ", level1[j]))
     for (k in 1:reps){
       print(paste0("iteration", k))
-      temp <- centered_fillin2(method = "matrix", permute_method = "random",
+      temp <- centered_fillin2(method = "spam", permute_method = "random",
                                i = level1[i], j = level1[j], permute = FALSE)
       results[k] <- temp$diff
     }

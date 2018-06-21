@@ -15,5 +15,6 @@ Check the performance of each package in obtaining the optimal fill-in for the c
 - permutations2_asymmetric_Matrix.R
 - permutations2_asymmetric_spam.R
 
-Show the poor performance of the Matrix chol function when pivot = FALSE (the default option) and the labels are permuted in reverse and random order:
+Show the poor performance of both the *Matrix* and *spam* chol functions when pivot = FALSE and the labels are permuted in reverse and random order:
 - fillinPerf_Matrix.R
+- fillinPerf_spam.R

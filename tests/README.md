@@ -9,7 +9,7 @@ Check that the precision generation function for centered parametrizations work 
 - precision_accuracy3.R
 
 
-Check the performance of each package in obtaining the optimal fill-in for the cholesky factor when permuting the labels of the precision matrix (with pivot = FALSE for the Matrix package):
+Check the performance of each package in obtaining the optimal fill-in for the cholesky factor when permuting the labels of the precision matrix (testing for both pivot = FALSE and pivot = TRUE for both *Matrix* and *spam* packages):
 - permutations2_Matrix.R
 - permutations2_spam.R
 - permutations2_asymmetric_Matrix.R

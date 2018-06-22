@@ -54,6 +54,7 @@ centered_fillin3 <- function(method, permute_method = 'none', i, j, k, permute =
   if (method == "spam"){
     Q_spam <- spam::spam(0, (d_minus_one+1), (d_minus_one+1))
     Q_spam[cbind(q$indices_i, q$indices_j)] <- q$entries
+    Q_spam <- Q_spam[og, og]
 
     # start time
     start <- Sys.time()
@@ -73,6 +74,7 @@ centered_fillin3 <- function(method, permute_method = 'none', i, j, k, permute =
 
   if (method == "matrix"){
     Q <- Matrix::sparseMatrix(q$indices_i, q$indices_j, x = q$entries)
+    Q <- Q[og, og]
 
     # start time
     start <- Sys.time()
@@ -95,6 +97,7 @@ centered_fillin3 <- function(method, permute_method = 'none', i, j, k, permute =
 
     ## matrix method
     Q <- Matrix::sparseMatrix(q$indices_i, q$indices_j, x = q$entries)
+    Q <- Q[og, og]
 
     # start time
     start <- Sys.time()
@@ -112,6 +115,7 @@ centered_fillin3 <- function(method, permute_method = 'none', i, j, k, permute =
     ## spam method
     Q_spam <- spam::spam(0, (d_minus_one+1), (d_minus_one+1))
     Q_spam[cbind(q$indices_i, q$indices_j)] <- q$entries
+    Q_spam <- Q_spam[og, og]
 
     # start time
     start <- Sys.time()
@@ -131,3 +135,5 @@ centered_fillin3 <- function(method, permute_method = 'none', i, j, k, permute =
   }
 
 }
+
+

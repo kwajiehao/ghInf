@@ -53,17 +53,19 @@ depthfirst <- function(i, j, k = NA, levels){
     increment <- seq(0, (i-1))
 
     for (m in 1:i){
-      # B_ijk
-      o[((j*k) * increment[m] + 1):((j*k) * increment[m] + (j*k))] <- o[((j*k) * increment[m] + 1):((j*k) * increment[m] + (j*k))] +
-        (j+1)*increment[m]
+      for (l in 1:j){
+        for (h in 1:k){
+          # print(paste0(m,l,h))
+          # print((m-1)*j*k + (l-1)*k + h)
+          o[(m-1)*j*k + (l-1)*k + h] <- (m-1)*(j*k + j + 1) + (l-1)*(k+1) + h
 
-      # B_ij
-      o[((i*j*k) + j*increment[m] + 1):((i*j*k) + j*increment[m] + j)] <- seq((o[((j*k) * increment[m] + (j*k))]+1), (o[((j*k) * increment[m] + (j*k))]+j))
-
-      # B_i
-      o[((i*j*k) + i*j + m)] <- (j*k + j)*(increment[m]+1) + m
+        }
+        # print(i*j*k + (m-1)*j +l)
+        o[i*j*k + (m-1)*j +l] <- (m-1)*(j*k + j + 1) + (l)*(k+1)
+      }
+      # print((i*j*k + i*j + m) + (j*k + j) + 1)
+      o[i*j*k + i*j + m] <- (m-1)*(j*k + j + 1) + (j*k + j) + 1
     }
-
   }
 
   return(order(o)[seq(1,n)])
@@ -72,17 +74,34 @@ depthfirst <- function(i, j, k = NA, levels){
 # # test to show how depthfirst works
 # I <- 2
 # J <- 3
-# K <- 1
+# K <- 2
+# n <- I*J*K + I*J + I + 1
 # depthfirst_test <- centered_precgen3(i=I, j=J, k=K, flat_prior = TRUE, tau = 1, tau_a = 1, tau_b = 1, tau_c = 1, sigma_2 = 1)
 #
 # test_mat <- matrix(0, (I*J*K + I*J + I + 1), (I*J*K + I*J + I + 1))
 # test_mat[cbind(depthfirst_test$indices_i, depthfirst_test$indices_j)] <- depthfirst_test$entries
-# rownames(test_mat) <- c('B111', 'B121','B131', 'B211', 'B221', 'B231', 'B11', 'B12','B13', 'B21','B22','B23','B1','B2','B')
-# colnames(test_mat) <- rownames(test_mat)
 #
-# og <- depthfirst(i = 2, j = 3, k = 1, levels = 3)
+# # without permutation, I use a lexicographic ordering
+# cols <- rep('B', n)
+#
+# for (i in 1:I){
+#   for (j in 1:J){
+#     for (k in 1:K){
+#       cols[ (i-1)*K*J + K*(j-1) + k] <- paste0('B', i, j, k)
+#     }
+#     cols[I*J*K + (i-1)*J + j] <- paste0('B', i, j)
+#   }
+#   cols[I*J*K + (I*J) + i] <- paste0('B', i)
+# }
+#
+# rows <- cols
+# colnames(test_mat) <- cols
+# rownames(test_mat) <- rows
+#
+# og <- depthfirst(i = 2, j = 3, k = 2, levels = 3)
 # og
+# length(og)
 #
 # ## compare original matrix with permuted matrix
-# A
-# A[og,og]
+# test_mat
+# test_mat[og,og]

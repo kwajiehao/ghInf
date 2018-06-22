@@ -77,7 +77,7 @@ rownames(Q_spam_mat) <- rows
 Q_spam_mat
 
 # obtain the depth-first permuted matrix
-og2 <- ghInf::depthfirst(i = I, j = J, k = K, levels = 3)
+og2 <- depthfirst(i = I, j = J, k = K, levels = 3)
 Q_spam_depthfirst <- Q_spam[og2, og2]
 Q_depthfirst <- Q_spam_mat[og2, og2]
 Q_depthfirst

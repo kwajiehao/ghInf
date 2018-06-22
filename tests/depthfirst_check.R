@@ -1,6 +1,6 @@
 #################### centered 2-level ####################
 I <- 2
-J <- 3
+J <- 6
 n <- (I*J + I + 1)
 centered_test2 <- ghInf::centered_precgen2(i = I, j = J)
 
@@ -49,7 +49,7 @@ ordered_Q
 #################### centered 3-level ####################
 I <- 2
 J <- 3
-K <- 3
+K <- 2
 n <- (I*J*K + I*J + I + 1)
 centered_test3 <- ghInf::centered_precgen3(i = I, j = J, k = K)
 

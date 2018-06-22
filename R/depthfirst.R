@@ -76,7 +76,7 @@ depthfirst <- function(i, j, k = NA, levels){
 # J <- 3
 # K <- 2
 # n <- I*J*K + I*J + I + 1
-# depthfirst_test <- centered_precgen3(i=I, j=J, k=K, flat_prior = TRUE, tau = 1, tau_a = 1, tau_b = 1, tau_c = 1, sigma_2 = 1)
+# depthfirst_test <- ghInf::centered_precgen3(i=I, j=J, k=K, flat_prior = TRUE, tau = 1, tau_a = 1, tau_b = 1, tau_c = 1, sigma_2 = 1)
 #
 # test_mat <- matrix(0, (I*J*K + I*J + I + 1), (I*J*K + I*J + I + 1))
 # test_mat[cbind(depthfirst_test$indices_i, depthfirst_test$indices_j)] <- depthfirst_test$entries

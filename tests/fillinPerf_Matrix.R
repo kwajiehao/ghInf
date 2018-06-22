@@ -111,10 +111,10 @@ abline(lm(df_random$percentage_fill ~ (df_random$no_params^2)), col = "red")
 legend(0, 0.3, legend=c("reverse","random"), col=c("black","red"), pch=c("o","*"))
 
 # ggplot plots
-gg <- ggplot2::ggplot(data = df_reverse, aes(x= no_params, y = results, col = "reverse")) + geom_point() +
-  geom_point(data = df_random, aes(x= no_params, y = results, col = "random")) +
-  geom_smooth(method = "lm", size = 0.5, se = FALSE) +
-  geom_smooth(data = df_random, method = "lm", color = "red", size = 0.5, se = FALSE) +
-  labs(title = "Ratio of fill-in to optimal-fill-in (Matrix package)", x = "number of parameters",
-       y = "ratio")
-gg + ggplot2::labs(color="permutation")
+# gg <- ggplot2::ggplot(data = df_reverse, aes(x= no_params, y = results, col = "reverse")) + geom_point() +
+#   geom_point(data = df_random, aes(x= no_params, y = results, col = "random")) +
+#   geom_smooth(method = "lm", size = 0.5, se = FALSE) +
+#   geom_smooth(data = df_random, method = "lm", color = "red", size = 0.5, se = FALSE) +
+#   labs(title = "Ratio of fill-in to optimal-fill-in (Matrix package)", x = "number of parameters",
+#        y = "ratio")
+# gg + ggplot2::labs(color="permutation")

@@ -48,7 +48,7 @@ ordered_Q
 
 #################### centered 3-level ####################
 I <- 2
-J <- 3
+J <- 15
 K <- 2
 n <- (I*J*K + I*J + I + 1)
 centered_test3 <- ghInf::centered_precgen3(i = I, j = J, k = K)
@@ -77,7 +77,7 @@ rownames(Q_spam_mat) <- rows
 Q_spam_mat
 
 # obtain the depth-first permuted matrix
-og2 <- depthfirst(i = I, j = J, k = K, levels = 3)
+og2 <- ghInf::depthfirst(i = I, j = J, k = K, levels = 3)
 Q_spam_depthfirst <- Q_spam[og2, og2]
 Q_depthfirst <- Q_spam_mat[og2, og2]
 Q_depthfirst

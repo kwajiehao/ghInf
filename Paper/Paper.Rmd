@@ -208,7 +208,7 @@ grid.arrange(img1, img2, ncol = 2)
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (a) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (b)
 
-\begin{center} \smallfont{Figure 2. Two graphs which illustrate the importance of ordering of nodes to computational efficiency. In graph (a), every node is connected to node 1 and only node 1, making it in the future set of every node. Thus, fill-in is maximal and the cholesky factorization for its precision matrix is $O(n^3)$. However, in graph (b), every node is connected to node 6 and only in node 6. It is thus in none of the future sets of any of the other nodes, making fill-in minmal and reducing complexity to $O(n)$}  \end{center}
+\begin{center} \smallfont{Figure 2. Two graphs which illustrate the importance of ordering of nodes to computational efficiency. In graph (a), every node is connected to node 1 and only node 1, making it in the future set of every node. Thus, fill-in is maximal and the cholesky factorization for its precision matrix is $O(n^3)$. However, in graph (b), every node is connected to node 6 and only node 6. It is thus in none of the future sets of any of the other nodes, making fill-in minimal and reducing complexity to $O(n)$}  \end{center}
 
 \vspace{0.6cm}
 
@@ -368,7 +368,7 @@ This paper illustrates how one can conduct scalable inference on Gaussian hierar
 
 For a 3-level model, we retain equations (2.1) to (2.3). However, we add an aditional level and a modified observation level.
 
-$$\beta_{ijk} \;|\; \beta_{ij} \sim N( \beta_{ij}, \tau_c)$$
+$$\beta_{ijk} \;|\; \beta_{ij} \sim N( \beta_{ij}, \tau_c) \;\;\; - (a.1)$$
 
 $$y_{ijk} \;|\; \beta_{ijk} \sim N( \beta_{ijk}, \sigma^2)$$ \newline \newline \newline
 
@@ -388,7 +388,7 @@ By expanding out the squared terms and rearranging them, we can deduce the terms
 
 $$
 \begin{aligned}
-\exp\{-\frac{1}{2} \boldsymbol{\beta}^{T} \boldsymbol{Q} \boldsymbol{\beta} \} \propto \exp\{-\frac{1}{2}(\sum_{i,j}(\frac{\beta_{ij}^2}{\sigma^2} + \frac{\beta_{ij}^2}{\tau_b}+\frac{\beta_{i}^2}{\tau_b} - \frac{2 \beta_{ij}\beta_i}{\tau_b}) + \sum_i( \frac{\beta_i^2}{\tau_a} + \frac{\beta^2}{\tau_a} - \frac{2\beta_i\beta}{\tau_a})  )\}
+\exp\{-\frac{1}{2} \boldsymbol{\beta}^{T} \boldsymbol{Q} \boldsymbol{\beta} \} \propto \exp\{-\frac{1}{2}(\sum_{i,j}(\frac{\beta_{ij}^2}{\sigma^2} + \frac{\beta_{ij}^2}{\tau_b}+\frac{\beta_{i}^2}{\tau_b} - \frac{2 \beta_{ij}\beta_i}{\tau_b}) + \sum_i( \frac{\beta_i^2}{\tau_a} + \frac{\beta^2}{\tau_a} - \frac{2\beta_i\beta}{\tau_a})  )\} \;\;\; - (a.2)
 \end{aligned}
 $$
 
@@ -419,7 +419,7 @@ $$
 \begin{aligned}
 P(x_i, x_j, \mathbf{x_{-\{ij\}}}) &= f(x_i, \mathbf{x_{-\{ij\}}}) g(x_j,\mathbf{x_{-\{ij\}}})\\
 P(x_i, x_j, \mathbf{x_{-\{ij\}}}) &\propto \exp\{-\frac{1}{2} \sum_{k,l} x_k Q_{kl} x_l\} \\
-&\propto \exp\{-\frac{1}{2}x_i x_j (Q_{ij} + Q_{ji}) -\frac{1}{2}\sum_{\{k,l\} \neq \{i,j\}} x_k Q_{kl} x_l\} \\
+&\propto \exp\{-\frac{1}{2}x_i x_j (Q_{ij} + Q_{ji}) -\frac{1}{2}\sum_{\{k,l\} \neq \{i,j\}} x_k Q_{kl} x_l\} \;\;\; - (a.3) \\
 \end{aligned}
 $$
 Since in this case, it is already assumed that $x_i \; \perp \; x_j \;|\; \mathbf{x_{-\{ij\}}}$, it follows that $Q_{ij} = Q_{ji} = 0$. \newline \newline \newline
@@ -430,8 +430,8 @@ Let $\boldsymbol{x}$ be a GMRF with respect to the labelled graph G, with mean $
 
 $$
 \begin{aligned}
-E(x_i | \boldsymbol{x}_{(i+1):n}) &= \mu_i − \frac{1}{L_ii} \sum_{j=i+1}^n L_{ji}(x_j − \mu_j) \;\;\; - (a.2)\\ 
-Prec(x_i | \boldsymbol{x}_{(i+1):n}) &= L^2_{ii} \;\;\; - (a.3)
+E(x_i | \boldsymbol{x}_{(i+1):n}) &= \mu_i − \frac{1}{L_ii} \sum_{j=i+1}^n L_{ji}(x_j − \mu_j) \;\;\; - (a.4)\\ 
+Prec(x_i | \boldsymbol{x}_{(i+1):n}) &= L^2_{ii} \;\;\; - (a.5)
 \end{aligned}
 $$
 Assume for simplicity that $\boldsymbol{\mu} = 0$ and fix $1 \leq i < j \leq n$, then:
@@ -439,19 +439,19 @@ Assume for simplicity that $\boldsymbol{\mu} = 0$ and fix $1 \leq i < j \leq n$,
 $$
 \begin{aligned}
 P(\boldsymbol{x}_{i:n}) &\propto \exp \left( -\frac{1}{2} \sum_{k=i}^n L_{kk}^2 \; \left(x_k + \frac{1}{L_{kk}} \sum_{j = k+1}^n L_{jk} x_j\right)^2 \right) \\
-&= \exp \left(-\frac{1}{2}\boldsymbol{x}_{i:n}^T \boldsymbol{Q}^{(i:n)} \boldsymbol{x}_{i:n} \right) \;\;\; - (a.4)
+&= \exp \left(-\frac{1}{2}\boldsymbol{x}_{i:n}^T \boldsymbol{Q}^{(i:n)} \boldsymbol{x}_{i:n} \right) \;\;\; - (a.6)
 \end{aligned}
 $$
 
 where $\boldsymbol{Q}^{i:n} = L_{ii} L_{ji}$. Using equation (2.12), it follows that:
-$$x_i \; \perp \; x_j \;|\; \boldsymbol{x}_{F(i,j)} \iff L_{ii}L_{ji}=0 \;\;\; - (a.5)$$
+$$x_i \; \perp \; x_j \;|\; \boldsymbol{x}_{F(i,j)} \iff L_{ii}L_{ji}=0 \;\;\; - (a.7)$$
 which is equivalent to equation (2.13) since $L_{ii}>0$ because the precision matrix is positive-definite. \newline \newline \newline
 
 \midsmallfont{A5. Markov properties of GMRF} \newline 
 
 This section is written with reference to Theorem 2.4 in Rue and Held (2002). From equation (2.12), a GMRF represented by the graph $G = (V,E)$ is defined by the non-zero pattern in the precision matrix $\boldsymbol{Q}$, since that tells you which nodes have edges to which other nodes. It turns out that for a GMRF, the pairwise Markov property defined in equation (2.11) is equivalent to the global Markov property:
 
-$$\boldsymbol{x}_A \; \perp \; \boldsymbol{x}_B \;|\; \boldsymbol{x}_{C} \;\;\; - (a.1) $$
+$$\boldsymbol{x}_A \; \perp \; \boldsymbol{x}_B \;|\; \boldsymbol{x}_{C} \;\;\; - (a.8) $$
 for all disjoint sets $A, B$, and $C$ where $C$ separates $A$ and $B$, and $A$ and $B$ are non-empty. \newline \newline \newline
 
 
@@ -469,7 +469,7 @@ $$
 \begin{aligned}
 P(\beta \;|\; \beta_{1:I}, \; \beta_{1:I,1:J}, \; y^*) &= \frac{P(\beta^* \;|\; y^*)}{P(\beta_{1:I},\; \beta_{1:I, 1:J}\;|\; y^*)} \\
 &\propto \exp \{-\frac{1}{2\sigma^2}\ \sum_{i,j} (y_{ij}-\beta_{ij})^2 - \frac{1}{2\tau_b}\sum_{i,j} (\beta_{ij}-\beta_{i})^2 -\frac{1}{2\tau_a} \sum_{i} (\beta_{i}-\beta)^2 - \frac{1}{2\tau}(\beta - \mu)^2 \}\\
-&\propto \exp \{ -\frac{1}{2\tau_a} \sum_i (\beta^2 -2\beta_i\beta) - \frac{1}{2\tau}\beta^2\}
+&\propto \exp \{ -\frac{1}{2\tau_a} \sum_i (\beta^2 -2\beta_i\beta) - \frac{1}{2\tau}\beta^2\} \;\;\; 
 \end{aligned}
 $$
 
@@ -481,19 +481,19 @@ $$
 \exp \{-\frac{1}{2\tau_a} \sum_i (\beta^2 -2\beta_i\beta) - \frac{1}{2\tau}\beta^2\} &= \exp \{-\frac{1}{2} \frac{\tau I \beta^2 - 2\tau\beta\sum_{i}\beta_i + \tau_a \beta^2}{\tau_a\tau}\} \\
 &= \exp \{-\frac{1}{2} \frac{(\tau+ \frac{\tau_a}{I}) \beta^2 - 2\tau\beta \beta.} {\frac{\tau_a\tau}{I}}\}\\ 
 &= \exp \{-\frac{1}{2} \frac{\beta^2 - 2\beta \beta. \frac{\tau}{\frac{\tau_a}{I}+\tau}} { \frac{\frac{\tau_a\tau }{I}} {\frac{\tau_a}{I}+\tau}}\}\\
-&\propto \exp \{-\frac{1}{2} \frac{(\beta - \beta. \frac{\tau}{\frac{\tau_a}{I}+\tau})^2} { \frac{\frac{\tau_a\tau }{I}} {\frac{\tau_a}{I}+\tau}}\} 
+&\propto \exp \{-\frac{1}{2} \frac{(\beta - \beta. \frac{\tau}{\frac{\tau_a}{I}+\tau})^2} { \frac{\frac{\tau_a\tau }{I}} {\frac{\tau_a}{I}+\tau}}\} \;\;\; - (a.9)
 \end{aligned}
 $$
 
 where $\beta. = \frac{\sum_i\beta_i}{I}$. From this, we can deduce the mean and variance of the posterior distribution of $\beta$.
 
 
-$$\beta \;|\; \beta_{1:I}, \;\beta_{1:I,1:J}, \boldsymbol{y} \sim N(\frac{\beta.\tau}{\frac{\tau_a}{I}+\tau}, \frac{\frac{\tau_a \tau}{I}}{\frac{\tau_a}{I}+\tau})$$
+$$\beta \;|\; \beta_{1:I}, \;\beta_{1:I,1:J}, \boldsymbol{y} \sim N(\frac{\beta.\tau}{\frac{\tau_a}{I}+\tau}, \frac{\frac{\tau_a \tau}{I}}{\frac{\tau_a}{I}+\tau})\;\;\; - (a.10)$$
 In the same way, the full conditionals for the other parameters can be derived. 
 
-$$\beta_i \;|\; \beta, \;\beta_{1:I,1:J}, \boldsymbol{y} \sim N(\frac{(\frac{\tau_b}{J} \beta + \tau_a \beta_{i\cdot})}{\tau_a + \frac{\tau_b}{J}},  \frac{\frac{\tau_a\tau_b }{J}} {\frac{\tau_b}{J}+\tau_a})$$
+$$\beta_i \;|\; \beta, \;\beta_{1:I,1:J}, \boldsymbol{y} \sim N(\frac{(\frac{\tau_b}{J} \beta + \tau_a \beta_{i\cdot})}{\tau_a + \frac{\tau_b}{J}},  \frac{\frac{\tau_a\tau_b }{J}} {\frac{\tau_b}{J}+\tau_a})\;\;\; - (a.11)$$
 
-$$\beta_{ij} \;|\; \beta, \;\beta_{1:I}, \boldsymbol{y} \sim N(\frac{\beta_i \sigma^2}{\tau_b + \sigma^2},  \frac{\tau_b \sigma^2}{\tau_b + \sigma^2})$$
+$$\beta_{ij} \;|\; \beta, \;\beta_{1:I}, \boldsymbol{y} \sim N(\frac{\beta_i \sigma^2}{\tau_b + \sigma^2},  \frac{\tau_b \sigma^2}{\tau_b + \sigma^2})\;\;\; - (a.12)$$
 
 
 
